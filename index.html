@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather</title>
+    <style>
+         body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #6dd5ed, #2193b0);
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            width: 250px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #2193b0;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+        .weather-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        img {
+            margin-top: 10px;
+        }
+        p {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>WEATHER APP</h1>
+    <form method = 'POST'>
+        <input type="text" name="city" placeholder="Enter City" required autocomplete="off">
+        <button type="submit">Get Weather</button>
+    </form>
+
+    {% if weather %}
+        {% if weather.error %}
+            <p>{{weather.error}}</p>
+        {% else %}
+            <h2>Weather in {{weather.city}}</h2>
+            <p>{{weather.temperature}} °C</p>
+            <p>{{weather.description}}</p>
+            <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png">
+        {% endif %}
+    {% endif %}
+</body>
+</html>
