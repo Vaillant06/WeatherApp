@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request
 import requests
+import os  
 
 app = Flask(__name__)
 
-API_KEY = "9cd9ba6c57c1b7e6f1450217ec210a8f"
+API_KEY = os.environ.get("API_KEY")
 
-@app.route('/', methods=['GET','POST'])
-
+@app.route('/', methods=['GET', 'POST'])
 def index():
     weather = None
     if request.method == 'POST':
@@ -21,12 +21,10 @@ def index():
                 'description': data['weather'][0]['description'],
                 'icon': data['weather'][0]['icon']
             }
-
         else:
             weather = {'error': 'City not found!'}
-    return render_template('index.html', weather = weather)
+    return render_template('index.html', weather=weather)
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))  # 5000 for local, dynamic in Render
+    port = int(os.environ.get("PORT", 5000))r
     app.run(host='0.0.0.0', port=port)
-
